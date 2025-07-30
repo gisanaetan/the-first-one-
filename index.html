@@ -1,48 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>صفحة بسيطة</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin-top: 100px;
-      background-color: #f0f0f0;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحة تفاعلية</title>
 
-    h1 {
-      color: #333;
-    }
+    <!-- CSS: تم الحذف  -->
+    <style>
+        /* تصميم الجسم الرئيسي للصفحة */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex; /* استخدام Flexbox لتوسيط المحتوى */
+            justify-content: center; /* توسيط غير أفقي */
+            align-items: center; /* توسيط عمودي */
+            height: 100vh; /* جعل ارتفاع الجسم يملأ الشاشة */
+            margin: 0; /* إزالة الهوامش الافتراضية */
+            background-color: #f0f0f0; /* لون خلفية افتراضي */
+            /* هذا هو السطر الأهم للتأثير الجميل: يجعل تغيير اللون سلساً خلال نصف ثانية */
+            transition: background-color 0.5s ease;
+        }
 
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-      background-color: #007BFF;
-      color: white;
-      border: none;
-      border-radius: 5px;
-    }
+        /* تصميم الحاوية التي تجمع العنوان والزر */
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 40px 60px;
+            border-radius: 15px; /* حواف دائرية */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* ظل خفيف لإعطاء عمق */
+        }
 
-    button:hover {
-      background-color: #0056b3;
-    }
-  </style>
+        /* تصميم العنوان */
+        h1 {
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        /* تصميم الزر */
+        button {
+            background-color: #007bff; /* لون الزر الأساسي */
+            color: white; /* لون النص داخل الزر */
+            border: none; /* إزالة الحدود */
+            padding: 15px 30px; /* هوامش داخلية للزر */
+            font-size: 16px; /* حجم الخط */
+            border-radius: 8px; /* حواف دائرية للزر */
+            cursor: pointer; /* تغيير شكل المؤشر عند المرور فوق الزر */
+            transition: background-color 0.3s ease; /* تأثير انتقال سلس للون الزر أيضاً */
+        }
+
+        /* تغيير لون الزر عند مرور الماوس فوقه */
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
 
-  <h1>مرحبًا بك في صفحتي البسيطة التي تم التعديل عليها مرة ثانية  </h1>
-  <p>هذه فقرة توضيحية بلغة HTML وCSS وJavaScript.</p>
+    <div class="container">
+        <!-- HTML: هنا نضع هيكل الصفحة -->
+        <h1> الموشوائيان العشوائي</h1>
+        <p>اضغط على الزر لتغيير لون الخلفية!</p>
+        <button id="changeColorBtn">غيّر اللون</button>
+    </div>
 
-  <button onclick="changeBackground()">غيّر لون الخلفية</button>
+    <!-- JavaScript: هنا نكتب الكود المسؤول عن التفاعل -->
+    <script>
+        // 1. احصل على العناصر من الـ HTML التي سنتعامل معها
+        const changeColorBtn = document.getElementById('changeColorBtn');
+        const body = document.body; // الوصول إلى عنصر الجسم مباشرة
 
-  <script>
-    function changeBackground() {
-      document.body.style.backgroundColor =
-        '#' + Math.floor(Math.random()*16777215).toString(16);
-    }
-  </script>
+        // 2. قائمة من الألوان الجميلة التي سنختار منها
+        const colors = [
+            '#ff7979', '#badc58', '#f9ca24', '#f0932b',
+            '#7ed6df', '#e056fd', '#686de0', '#30336b'
+        ];
+
+        // 3. وظيفة لتغيير لون الخلفية
+        function changeBackgroundColor() {
+            // اختر لوناً عشوائياً من القائمة
+            // Math.random() يعطي رقم عشوائي بين 0 و 1
+            // نضربه في طول القائمة للحصول على فهرس عشوائي
+            const randomIndex = Math.floor(Math.random() * colors.length);
+            const randomColor = colors[randomIndex];
+
+            // قم بتعيين لون خلفية الجسم إلى اللون العشوائي المختار
+            body.style.backgroundColor = randomColor;
+        }
+
+        // 4. أضف "مستمع حدث" للزر لينفذ الوظيفة عند النقر عليه
+        changeColorBtn.addEventListener('click', changeBackgroundColor);
+    </script>
 
 </body>
 </html>
